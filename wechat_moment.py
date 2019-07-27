@@ -21,7 +21,7 @@ from PIL import Image
 from wordcloud import WordCloud, ImageColorGenerator
 
 
-class Wx_moment():
+class Wx_moment:
     def __init__(self):
         desired_caps = dict()
         desired_caps['platformName'] = 'Android'
