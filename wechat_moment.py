@@ -6,7 +6,7 @@
 
 """
 文件说明：
-
+    对微信朋友圈内容进行抓取并转换成词云图
 """
 from appium import webdriver
 from selenium.webdriver.common.by import By
