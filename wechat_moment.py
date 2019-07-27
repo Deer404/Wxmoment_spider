@@ -18,7 +18,7 @@ import jieba  # jieba分词
 import warnings
 import numpy as np
 from PIL import Image
-from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
+from wordcloud import WordCloud, ImageColorGenerator
 
 
 class Wx_moment():
@@ -103,8 +103,8 @@ class Wx_moment():
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             insert_sql = """INSERT ignore INTO moment(name,content)values(%s,%s);"""
-            self.cursor.execute(insert_sql,(name,content))
-        #####################
+            self.cursor.execute(insert_sql, (name, content))
+            #####################
             self.db.commit()
 
     def close_db(self):
@@ -121,7 +121,7 @@ class Wx_moment():
             self.moment_text = self.moment_text + content
         # with open('data.txt', 'w+',encoding='UTF-8') as f:
         #     f.write(moment_string)
-        cut_text = " ".join(jieba.cut(self.moment_text,cut_all=True))
+        cut_text = " ".join(jieba.cut(self.moment_text, cut_all=True))
         girl_img = np.array(Image.open('girl.png'))
         image_colors = ImageColorGenerator(girl_img)
         wordcloud = WordCloud(
@@ -144,7 +144,7 @@ class Wx_moment():
         for item in result:
             name = item[1]
             self.moment_text = self.moment_text + name
-            jieba.add_word(name) #把朋友圈姓名加入分词词库 避免被分开
+            jieba.add_word(name)  # 把朋友圈姓名加入分词词库 避免被分开
         # jieba.add_word("牛顿不是很喜欢苹果")
         cut_text = " ".join(jieba.cut(self.moment_text))
         girl_img = np.array(Image.open('girl.png'))
@@ -162,7 +162,6 @@ class Wx_moment():
         wordcloud.recolor(color_func=image_colors)
         wordcloud.to_file("朋友圈名字词云.png")
         print("生成成功")
-
 
     # def convert_to_wordcloud(self): #生成词云方法 已经内置在save_to_xx方法里 不需要单独使用
     #     print("生成词云中")
@@ -202,11 +201,12 @@ class Wx_moment():
             self.save_name()
         self.close_db()
 
-
-    def wipe_data(self): # 清除表数据 不可撤回噢
+    def wipe_data(self):  # 清除表数据 不可撤回噢
         deletesql = "truncate table moment"
         self.cursor.execute(deletesql)
         self.db.commit()
+
+
 if __name__ == "__main__":
     wx = Wx_moment()
-    wx.run(200 ,1)
+    wx.run(200, 1)
