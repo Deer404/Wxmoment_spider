@@ -102,7 +102,6 @@ class Wx_moment():
         # insert_sql = """INSERT INTO moment(name,content)values(%s,%s) ON DUPLICATE KEY UPDATE content = %s;"""
         # self.cursor.execute(insert_sql, (name, content, content))
         ######################
-        # 这个更好 避免重复插入而且ID值正常增长 但是会尼玛报Warining
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             insert_sql = """INSERT ignore INTO moment(name,content)values(%s,%s);"""
