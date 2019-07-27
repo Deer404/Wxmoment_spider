@@ -14,8 +14,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import pymysql
-from wordcloud import WordCloud
-import matplotlib.pyplot as plt  # 绘制图像的模块
 import jieba  # jieba分词
 import warnings
 import numpy as np
